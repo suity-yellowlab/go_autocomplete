@@ -1,0 +1,6 @@
+{
+    "DBString" : "user:password@tcp(127.0.0.1)/dbname",
+    "ServerAddress" : "127.0.0.1:8021",
+    "ResultLimit" : 50
+
+}
