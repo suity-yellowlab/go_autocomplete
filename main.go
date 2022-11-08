@@ -20,9 +20,13 @@ type AutocompleteTreffer struct {
 }
 
 type Settings struct {
-	DBString      string `json:"DBString"`
-	ServerAddress string `json:"ServerAddress"`
-	ResultLimit   int    `json:"ResultLimit"`
+	DBString           string `json:"DBString"`
+	ServerAddress      string `json:"ServerAddress"`
+	ResultLimit        int    `json:"ResultLimit"`
+	TableName          string `json:"TableName"`
+	IdColName          string `json:"IdColName"`
+	QueryColName       string `json:"QueryColName"`
+	ResultCountColName string `json:"ResultCountColName"`
 }
 type QueryResponse struct {
 	Time        string                `json:"Time"`
@@ -127,7 +131,7 @@ func main() {
 	start := time.Now()
 	settings := loadSettings()
 	close := connect(settings)
-	entries = loadAutoCompleteData()
+	entries = loadAutoCompleteData(settings)
 	// DB is no longer needed at this stage
 	err := close()
 	if err != nil {
