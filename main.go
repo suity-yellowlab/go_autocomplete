@@ -66,6 +66,12 @@ func printResults(results []int) {
 	}
 
 }
+func min(a, b int) int {
+	if a < b {
+		return a
+	}
+	return b
+}
 func searchQuery(w http.ResponseWriter, r *http.Request) {
 	start := time.Now()
 	query := r.URL.Query()
@@ -86,7 +92,7 @@ func searchQuery(w http.ResponseWriter, r *http.Request) {
 	})
 	enc := json.NewEncoder(w)
 	duration := time.Since(start)
-	response = response[:resultLimit]
+	response = response[:min(len(response), resultLimit)]
 	resp := QueryResponse{
 		Time:        duration.String(),
 		ResultCount: len(response),
